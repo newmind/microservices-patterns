@@ -8,6 +8,7 @@
 
 ```sh
 chmod a+x *.sh gradlew
+find . -name '*.sh' -exec chmod a+x {} \;
 ```
 
 # 빌드
@@ -18,7 +19,7 @@ chmod a+x *.sh gradlew
 
 # 도커 컨테이너에 배포할 jar 만들기
 ./gradlew assemble
-find . -name ftgo-*.jar
+find . -name "ftgo-*.jar"
 ```
 
 # 도커 컴포즈 실행
@@ -29,4 +30,21 @@ get-pip 를 python2.7 용으로 url 수정
 . ./set-env.sh
 
 docker-compose up -d
+
+docker ps
+```
+
+컨테이너의 상태가 계속 unhealthy 이면, docker 의 cpu, memory 를 4core, 4096MB 으로 늘려준다
+
+# 스웨거 접속
+`
+소비자 생성: http://localhost:8081/swagger-ui.html
+음심점 생성: http://localhost:8084/swagger-ui.html
+주문 생성/조회: http://localhost:8082/swagger-ui.html
+주문 이력 조회: http://localhost:8086/swagger-ui.html
+`
+
+# 도커 컴포즈 종료
+```sh
+docker-compose down -v
 ```
