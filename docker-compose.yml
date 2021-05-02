@@ -212,12 +212,24 @@ services:
       environment:
         JAVA_OPTS: -Xmx128m
 
+  # dynamodblocal_old:
+  #   build: ./dynamodblocal
+  #   ports:
+  #    - "8000:8000"
+  #   environment:
+  #     JAVA_OPTS: -Xmx128m
+
   dynamodblocal:
-    build: ./dynamodblocal
+    command: "-jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodblocal
     ports:
-     - "8000:8000"
-    environment:
-      JAVA_OPTS: -Xmx128m
+      - "8000:8000"
+    # environment:
+    #   JAVA_OPTS: -Xmx128m
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
 
   dynamodblocal-init:
     build: ./dynamodblocal-init

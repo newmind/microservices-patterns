@@ -48,3 +48,13 @@ docker ps
 ```sh
 docker-compose down -v
 ```
+
+# troubleshooting
+
+1. dynamodblocal 실행시 아래의 에러 발생시
+
+    `
+    Unsupported major.minor version 52.0
+    `
+
+    aws 의 dynamodb-local 도커 이미지를 실행하게 변경 
